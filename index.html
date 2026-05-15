@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portal de Orientação e Direitos LGBTI+</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #f8fafc;
+            --card-bg: #ffffff;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+            --primary: #6366f1;
+            --primary-hover: #4f46e5;
+            --accent: #ec4899;
+            --border-radius: 12px;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            padding-bottom: 60px;
+        }
+
+        header {
+            background: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
+            color: white;
+            text-align: center;
+            padding: 50px 20px;
+            margin-bottom: 40px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        header p {
+            font-size: 1.1rem;
+            font-weight: 300;
+            opacity: 0.9;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        section {
+            background: var(--card-bg);
+            padding: 30px;
+            margin-bottom: 40px;
+            border-radius: var(--border-radius);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+            border-bottom: 2px solid #f1f5f9;
+            padding-bottom: 10px;
+        }
+
+        /* Grid dos 4 Botões Principais */
+        .main-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .main-btn {
+            background: var(--card-bg);
+            border: 2px solid #e2e8f0;
+            padding: 20px;
+            border-radius: var(--border-radius);
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-main);
+            cursor: pointer;
+            transition: var(--transition);
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+        }
+
+        .main-btn:hover, .main-btn.active {
+            border-color: var(--primary);
+            color: var(--primary);
+            background: #f5f3ff;
+            transform: translateY(-2px);
+        }
+
+        /* Painéis de Conteúdo Interativo */
+        .content-panel {
+            display: none;
+            animation: fadeIn 0.4s ease;
+        }
+
+        .content-panel.active {
+            display: block;
+        }
+
+        /* Estilo para as Letras LGBTQIAPN+ */
+        .letters-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .letter-btn {
+            background: #f1f5f9;
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: var(--text-main);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .letter-btn:hover, .letter-btn.active {
+            background: var(--accent);
+            color: white;
+        }
+
+        /* Subtópicos e Acordeons Gerais */
+        .interactive-item {
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            overflow: hidden;
+        }
+
+        .interactive-header {
+            background: #f8fafc;
+            padding: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: var(--transition);
+        }
+
+        .interactive-header:hover {
+            background: #f1f5f9;
+        }
+
+        .interactive-content {
+            display: none;
+            padding: 15px;
+            background: white;
+            border-top: 1px solid #e2e8f0;
+            color: var(--text-muted);
+        }
+
+        /* Vídeos Responsivos */
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            margin-bottom: 20px;
+            border-radius: var(--border-radius);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        .video-flex {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        /* Animação simples */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 600px) {
+            header h1 { font-size: 1.8rem; }
+            section { padding: 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Direitos e Orientações à Comunidade LGBTI+</h1>
+        <p>Espaço informativo focado em cidadania, respeito e saúde integrativa.</p>
+    </header>
+
+    <div class="container">
+        
+        <!-- Bloco Inicial: 4 Botões Principais -->
+        <div class="main-grid">
+            <button class="main-btn" onclick="toggleMainSection('sec-nomenclatura', this)">Botão 01: Nomenclatura LGBTI+</button>
+            <button class="main-btn" onclick="toggleMainSection('sec-expressao', this)">Botão 02: Orientação e Expressão</button>
+            <button class="main-btn" onclick="toggleMainSection('sec-orientacao', this)">Botão 03: Orientação Sexual</button>
+            <button class="main-btn" onclick="toggleMainSection('sec-trans', this)">Botão 04: Pessoas Trans</button>
+        </div>
+
+        <!-- Seções das Respostas dos 4 Botões -->
+        <section id="sec-nomenclatura" class="content-panel">
+            <h2>Nomenclatura LGBTQIAPN+</h2>
+            <p style="margin-bottom: 15px; color: var(--text-muted);">Clique em cada letra para entender o significado direto:</p>
+            <div class="letters-container">
+                <button class="letter-btn" onclick="toggleLetter('L', '<b>Lésbicas:</b> Mulheres que sentem atração afetiva e/ou sexual por outras mulheres.')">L</button>
+                <button class="letter-btn" onclick="toggleLetter('G', '<b>Gays:</b> Homens que sentem atração afetiva e/ou sexual por outros homens.')">G</button>
+                <button class="letter-btn" onclick="toggleLetter('B', '<b>Bissexuais:</b> Pessoas que se atraem romanticamente ou sexualmente por mais de um gênero.')">B</button>
+                <button class="letter-btn" onclick="toggleLetter('T', '<b>Transgêneros, Transexuais e Travestis:</b> Pessoas cuja identidade de gênero difere do sexo biológico designado ao nascer.')">T</button>
+                <button class="letter-btn" onclick="toggleLetter('Q', '<b>Queer:</b> Pessoas que transitam entre os gêneros ou não se alinham estritamente aos padrões heteronormativos.')">Q</button>
+                <button class="letter-btn" onclick="toggleLetter('I', '<b>Intersexo:</b> Pessoas cujas características biológicas (cromossomos ou órgãos genitais) não se encaixam no binário típico masculino ou feminino.')">I</button>
+                <button class="letter-btn" onclick="toggleLetter('A', '<b>Assexuais:</b> Pessoas que vivenciam pouca ou nenhuma atração sexual por outras pessoas.')">A</button>
+                <button class="letter-btn" onclick="toggleLetter('P', '<b>Pansexuais:</b> Pessoas que sentem atração por indivíduos, independentemente de sua identidade de gênero ou sexo biológico.')">P</button>
+                <button class="letter-btn" onclick="toggleLetter('N', '<b>Não-Binárias:</b> Pessoas cuja identidade de gênero não é estritamente masculina ou feminina, podendo ser uma mistura ou nenhuma delas.')">N</button>
+                <button class="letter-btn" onclick="toggleLetter('MAIS', '<b>+:</b> Símbolo que inclui todas as demais orientações sexuais, identidades e expressões de gênero não representadas pelas letras anteriores.')">+</button>
+            </div>
+            <div id="letter-explanation" class="interactive-content" style="display:block; min-height: 50px; background: #f8fafc; border-radius: 8px; border-top: none;">
+                <em>Selecione uma letra acima para ler a explicação.</em>
+            </div>
+        </section>
+
+        <section id="sec-expressao" class="content-panel">
+            <h2>Orientação e Expressão de Gênero</h2>
+            <p style="margin-bottom: 15px; color: var(--text-muted);">Clique nos tópicos abaixo para compreender a diferença:</p>
+            
+            <div class="interactive-item">
+                <div class="interactive-header" onclick="toggleAccordion(this)">Identidade de Gênero <span>+</span></div>
+                <div class="interactive-content">Como a pessoa se reconhece internamente. É a percepção íntima do próprio gênero (homem, mulher, não-binário), independentemente do sexo biológico atribuído no nascimento.</div>
+            </div>
+            <div class="interactive-item">
+                <div class="interactive-header" onclick="toggleAccordion(this)">Expressão de Gênero <span>+</span></div>
+                <div class="interactive-content">Como a pessoa manifesta o seu gênero publicamente. Envolve formas de se vestir, corte de cabelo, comportamento, voz e interações sociais, baseando-se ou desafiando as expectativas culturais.</div>
+            </div>
+        </section>
+
+        <section id="sec-orientacao" class="content-panel">
+            <h2>Orientação Sexual</h2>
+            <div class="interactive-content" style="display: block; background: #f8fafc; border-radius: 8px;">
+                <p><strong>O que é?</strong> A orientação sexual diz respeito à atração afetiva, emocional e/ou sexual que um indivíduo sente em relação a outras pessoas. Ela define por quem você se apaixona e sente atração (seja pelo mesmo gênero, por gêneros diferentes ou por múltiplos gêneros). Importante frisar: orientação sexual <strong>não tem relação</strong> com a sua identidade de gênero.</p>
+            </div>
+        </section>
+
+        <section id="sec-trans" class="content-panel">
+            <h2>Pessoas Trans</h2>
+            <p style="margin-bottom: 15px;">Indivíduos cuja identidade de gênero é diferente daquela designada no momento do nascimento. Abaixo, clique nos termos para conhecer os direitos assegurados por lei e pelo SUS:</p>
+            
+            <div class="interactive-item">
+                <div class="interactive-header" onclick="toggleAccordion(this)">Nome Social <span>+</span></div>
+                <div class="interactive-content">Direito de ser chamado pelo nome com o qual se identifica, garantido em órgãos públicos, escolas, prontuários de saúde (SUS) e documentos de identificação civil, sem a obrigatoriedade de cirurgia prévia.</div>
+            </div>
+            <div class="interactive-item">
+                <div class="interactive-header" onclick="toggleAccordion(this)">Hormonização <span>+</span></div>
+                <div class="interactive-content">Acesso à terapia hormonal segura e supervisionada por profissionais médicos (endocrinologistas) através do Processo Transexualizador do SUS, visando adequar os caracteres físicos à identidade de gênero.</div>
+            </div>
+            <div class="interactive-item">
+                <div class="interactive-header" onclick="toggleAccordion(this)">Atendimentos Específicos <span>+</span></div>
+                <div class="interactive-content">Direito a consultas humanizadas, livres de discriminação ou julgamentos morais, com garantia do uso do nome social desde a recepção até o atendimento médico.</div>
+            </div>
+            <div class="interactive-item">
+                <div class="interactive-header" onclick="toggleAccordion(this)">Tratamentos e Cirurgias <span>+</span></div>
+                <div class="interactive-content">Cobertura pelo SUS para o acompanhamento multiprofissional (psicologia, assistência social) e procedimentos cirúrgicos de redesignação sexual e adequação corporal, conforme resoluções vigentes.</div>
+            </div>
+        </section>
+
+        <!-- Seção Fixa na Rolagem: Atenção Primária à Saúde -->
+        <section>
+            <h2>Como contribuir e acolher pessoas LGBT na Atenção Primária à Saúde (APS)</h2>
+            <p style="margin-bottom: 20px;">A Atenção Primária é a porta de entrada do sistema de saúde. Profissionais devem pautar o atendimento no respeito à dignidade humana, garantindo o uso do Nome Social na ficha de cadastro, combatendo ativamente a homotransfobia institucional e realizando uma escuta qualificada sem pressupor a heterossexualidade dos usuários.</p>
+            
+            <div class="video-flex">
+                <div>
+                    <p style="font-weight: 600; margin-bottom: 8px; font-size: 0.9rem;">Vídeo Informativo 1:</p>
+                    <div class="video-container">
+                        <iframe src="https://www.youtube.com/embed/Hhl4SVikbB4" allowfullscreen></iframe>
+                    </div>
+                </div>
+                <div>
+                    <p style="font-weight: 600; margin-bottom: 8px; font-size: 0.9rem;">Vídeo Informativo 2:</p>
+                    <div class="video-container">
+                        <iframe src="https://www.youtube.com/embed/KMYAS7el2dc" allowfullscreen></iframe>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Seção Fixa na Rolagem: Saúde e Direitos Específicos Trans -->
+        <section>
+            <h2>Saúde e Direitos da Pessoa Trans</h2>
+            <p style="margin-bottom: 15px; color: var(--text-muted);">Clique nos grupos abaixo para visualizar as diretrizes clínicas e de direitos:</p>
+
+            <div class="interactive-item">
+                <div class="interactive-header" onclick="toggleAccordion(this)">Homens Trans (Direitos e Linha de Cuidado) <span>+</span></div>
+                <div class="interactive-content">
+                    <p><strong>Atendimento Integrado:</strong> Direito ao respeito e acesso integral à saúde no SUS.</p><br>
+                    <p><strong>Coleta de Citopatológico:</strong> Homens trans que possuem útero e colo do útero devem realizar o preventivo regularmente para rastreamento de câncer de colo uterino, de forma humanizada.</p><br>
+                    <p><strong>Mamografia:</strong> Indicada para homens trans que não realizaram a mastectomia masculinizadora, seguindo a faixa etária e critérios preventivos padrão.</p><br>
+                    <p><strong>Gravidez e Puerpério:</strong> Homens trans gestantes têm total direito ao acompanhamento de pré-natal humanizado, respeito na maternidade e assistência integral ao parto e pós-parto (puerpério).</p>
+                </div>
+            </div>
+
+            <div class="interactive-item">
+                <div class="interactive-header" onclick="toggleAccordion(this)">Mulheres Trans (Direitos e Linha de Cuidado) <span>+</span></div>
+                <div class="interactive-content">
+                    <p><strong>Atendimento e Respeito:</strong> Garantia do uso do nome social em todos os níveis de complexidade assistencial.</p><br>
+                    <p><strong>Prevenção Clínica:</strong> Mulheres trans mantêm a próstata mesmo após cirurgias de redesignação, necessitando de acompanhamento e exames de rastreamento conforme orientação médica.</p><br>
+                    <p><strong>Saúde das Mamas:</strong> O uso prolongado de estrogênios na hormonização requer o monitoramento e exame clínico das mamas para prevenção/rastreamento do câncer de mama.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Seção Fixa na Rolagem: Prevenção Combinada (PrEP e PEP) -->
+        <section>
+            <h2>Prevenção Combinada ao HIV</h2>
+            <p style="margin-bottom: 15px; color: var(--text-muted);">Clique em cada sigla para abrir as informações essenciais de saúde:</p>
+
+            <div class="interactive-item">
+                <div class="interactive-header" onclick="toggleAccordion(this)">PrEP (Profilaxia Pré-Exposição) <span>+</span></div>
+                <div class="interactive-content">
+                    <p><strong>O que é?</strong> É o uso programado de medicamentos antirretrovirais diários por pessoas que não têm o HIV, mas que estão em contextos de maior vulnerabilidade à infecção.</p><br>
+                    <p><strong>Para que serve?</strong> Serve para preparar o organismo para barrar o vírus caso ocorra um contato com o HIV, impedindo que ele se instale no corpo.</p><br>
+                    <p><strong>Quando usar?</strong> Indicado para quem tem relações sexuais frequentes sem preservativo, faz uso repetido de PEP ou apresenta histórico de Infecções Sexualmente Transmissíveis (ISTs).</p><br>
+                    <p><strong>Orientações Gerais:</strong> Disponibilizada gratuitamente pelo SUS. Exige acompanhamento médico contínuo, realização de testes regulares de HIV e monitoramento de funções renais.</p>
+                </div>
+            </div>
+
+            <div class="interactive-item">
+                <div class="interactive-header" onclick="toggleAccordion(this)">PEP (Profilaxia Pós-Exposição) <span>+</span></div>
+                <div class="interactive-content">
+                    <p><strong>O que é?</strong> Medida de prevenção de urgência que consiste no uso de medicamentos antirretrovirais por 28 dias seguidos após uma situação de risco real de infecção pelo HIV.</p><br>
+                    <p><strong>Para que serve?</strong> Serve para evitar que o vírus se replique e se estabeleça no organismo após um possível contato recente.</p><br>
+                    <p><strong>Quando usar?</strong> Deve ser iniciada em casos de violência sexual, relações sexuais sem camisinha (ou quando ela rompe) ou acidentes com materiais biológicos.</p><br>
+                    <p><strong>Orientações Gerais:</strong> É uma urgência médica. Deve ser iniciada idealmente nas primeiras 2 horas após a exposição, tendo como <strong>limite máximo 72 horas</strong>.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Encerramento com Vídeo Final -->
+        <section>
+            <h2>Informação é Direito e Cuidado</h2>
+            <p style="margin-bottom: 20px;">Assista abaixo ao fechamento das nossas orientações para fixação dos tópicos discutidos:</p>
+            <div class="video-container">
+                <iframe src="https://www.youtube.com/embed/RPw7eM4MIWM" allowfullscreen></iframe>
+            </div>
+        </section>
+
+    </div>
+
+    <script>
+        // Função para alternar visibilidade entre as 4 grandes seções iniciais
+        function toggleMainSection(sectionId, buttonElement) {
+            // Fecha todas as seções principais
+            document.querySelectorAll('.content-panel').forEach(panel => {
+                panel.classList.remove('active');
+            });
+            // Remove classe ativa de todos os botões principais
+            document.querySelectorAll('.main-grid .main-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+
+            // Ativa a seção selecionada
+            const targetSection = document.getElementById(sectionId);
+            targetSection.classList.add('active');
+            buttonElement.classList.add('active');
+
+            // Rola suavemente até a seção aberta
+            targetSection.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+
+        // Função específica para os botões de letras (LGBTQIAPN+)
+        function toggleLetter(letter, text) {
+            // Remove ativa de todas as letras
+            document.querySelectorAll('.letter-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            // Define o botão clicado como ativo
+            event.currentTarget.classList.add('active');
+            
+            // Exibe o texto explicativo correspondente
+            const explanationDiv = document.getElementById('letter-explanation');
+            explanationDiv.innerHTML = text;
+        }
+
+        // Função geral de Acordeon (subtópicos que abrem e fecham individualmente)
+        function toggleAccordion(headerElement) {
+            const content = headerElement.nextElementSibling;
+            const icon = headerElement.querySelector('span');
+
+            if (content.style.display === 'block') {
+                content.style.display = 'none';
+                icon.textContent = '+';
+            } else {
+                content.style.display = 'block';
+                icon.textContent = '-';
+            }
+        }
+    </script>
+</body>
+</html>
